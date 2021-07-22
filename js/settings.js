@@ -24,14 +24,6 @@ window.onload = function() {
     }
 }
 
-selectedEndpoint.onchange = function () {
-    localStorage.setItem("apiSet", this.value)
-    // Set API on change
-    setAPI()
-    localStorage.removeItem("address")
-    document.location.reload()
-}
-
 var mainnet = "https://api2.dogec.io"
 // Set the api in local storage
 function setAPI() {
