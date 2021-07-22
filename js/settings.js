@@ -1,5 +1,3 @@
-//api = "https://api.sugarchain.org"
-//localStorage.setItem("api", api)
 var href
 var selectedEndpoint = document.getElementById("endpointSelect")
 window.onload = function() {
@@ -14,10 +12,7 @@ window.onload = function() {
 
     // Sets History Tab to open to explorer according to testnet or mainnet
     if (apiget == "mainnet" || apiget == null) {
-        href = "https://sugarchain.org/explorer/#/address/" + getaddress
-    }
-    else if (apiget == "testnet"){
-        href = "https://sugar.wtf/#/address/" + getaddress
+        href = "https://explorer.dogec.io/address/" + getaddress
     }
     $("#history").attr("href", href)
 
@@ -37,17 +32,13 @@ selectedEndpoint.onchange = function () {
     document.location.reload()
 }
 
-var mainnet = "https://api.sugarchain.org"
-var testnet = "https://api-testnet.sugarchain.org"
+var mainnet = "https://api2.dogec.io"
 // Set the api in local storage
 function setAPI() {
     var apiSet = localStorage.getItem("apiSet")
 
     if (apiSet == "mainnet") {
         localStorage.setItem("api", mainnet)
-    }
-    else if (apiSet == "testnet") {
-        localStorage.setItem("api", testnet)
     }
 }
 

@@ -11,10 +11,7 @@ window.onload = function() {
 
     // Sets History Tab to open to explorer
     if (apiget == "mainnet" || apiget == null) {
-        href = "https://sugarchain.org/explorer/#/address/" + getaddress
-    }
-    else if (apiget == "testnet") {
-        href = "https://sugar.wtf/#/address/" + getaddress
+        href = "https://explorer.dogec.io/address/" + getaddress
     }
     $("#history").attr("href", href)
 
@@ -23,33 +20,17 @@ window.onload = function() {
 
 function getImportAPI() {
     // Set Network config according to Endpoint selection
-    if (localStorage.getItem("api") == "https://api.sugarchain.org" || localStorage.getItem("api") == null){
+    if (localStorage.getItem("api") == "https://api2.dogec.io" || localStorage.getItem("api") == null){
         netconfig = {					
            'network': {
-                'messagePrefix': '\x19Sugarchain Signed Message:\n',
+                'messagePrefix': '\x19DogeCash Signed Message:\n',
                 'bip32': {
                     'public': 0x0488b21e,
                     'private': 0x0488ade4
                 },
-               'bech32': 'sugar',
-               'pubKeyHash': 0x3F,
-               'scriptHash': 0x7D,
-                'wif': 0x80}
-        }
-    }
-    
-    else if (localStorage.getItem("api") == "https://api-testnet.sugarchain.org") {
-        netconfig = {					
-            'network': {
-                'messagePrefix': '\x19Sugarchain Signed Message:\n',
-                'bip32': {
-                    'public': 0x0488b21e,
-                    'private': 0x0488ade4
-                },
-                'bech32': 'tugar',
-                'pubKeyHash': 0x42,
-                'scriptHash': 0x80,
-                'wif': 0xEF}
+                'pubKeyHash': 0x1E,
+                'scriptHash': 0x13,
+                'wif': 0x7A}
         }
     }
 }
@@ -68,16 +49,14 @@ $("#wifImport").click(function() {
     
         var legacyadd = bitcoin.payments.p2pkh({'pubkey': wifKey.publicKey, 'network': netconfig['network']}).address
         var segwitadd = bitcoin.payments.p2sh({'redeem': redeem, 'network': netconfig['network']}).address
-        var bech32add = bitcoin.payments.p2wpkh({'pubkey': wifKey.publicKey, 'network': netconfig['network']}).address
 
         alert(alert1)
 
-        // Only set bech32 address and WIF key
-        localStorage.setItem("address", bech32add)
+        // Only set legacy address and WIF key
+        localStorage.setItem("address", legacyadd)
         localStorage.setItem("wifKey", $("#wifInput").val())
     
         $("#showLegacy").text(legacyadd)
-        $("#showBech32").text(bech32add)
         $("#showSegwit").text(segwitadd)
     }
     // Else show error
@@ -95,7 +74,7 @@ $("#wifImport").click(function() {
 
     // Sets History Tab to open to explorer
     if (apiget == "mainnet") {
-        href = "https://sugarchain.org/explorer/#/address/" + getaddress
+        href = "https://explorer.dogec.io/address/" + getaddress
     }
     else if (apiget == "testnet") {
         href = "https://sugar.wtf/#/address/" + getaddress
@@ -109,7 +88,6 @@ var lang = {
         'wifImport': "Import WIF",
         'legacy': "Legacy address:",
         'segwit': "Segwit address:",
-        'bech32': "Bech32 address:",
         'alert1': "WIF Imported Successfully",
         "alert2": "WIF Invalid",
         'logoutreminder': {
@@ -134,7 +112,6 @@ var lang = {
         'wifImport': "Importer WIF",
         'legacy': "Legacy Adresse:",
         'segwit': "Segwit Adresse:",
-        'bech32': "Bech32 Adresse:",
         'alert1': "WIF Importé Succès",
         "alert2": "WIF invalide",
         'logoutreminder': {
@@ -158,7 +135,6 @@ var lang = {
         'wifImport': "수입 WIF",
         'legacy': "Legacy 주소를:",
         'segwit': "Segwit 주소를:",
-        'bech32': "Bech32 주소를:",
         'alert1': "WIF 수입품 성공적으로",
         "alert2": "WIF 무효로 하는",
         'logoutreminder': {
@@ -182,7 +158,6 @@ var lang = {
         'wifImport': "Impor WIF",
         'legacy': "Legacy Alamat:",
         'segwit': "Segwit Alamat:",
-        'bech32': "Bech32 Alamat:",
         'alert1': "WIF yg diimpor Berhasil",
         "alert2": "WIF batal",
         'logoutreminder': {
@@ -206,7 +181,6 @@ var lang = {
         'wifImport': "Importar WIF",
         'legacy': "Legacy Alocución:",
         'segwit': "Segwit Alocución:",
-        'bech32': "Bech32 Alocución:",
         'alert1': "WIF Importado Exitosamente",
         "alert2": "WIF inválido",
         'logoutreminder': {
@@ -230,7 +204,6 @@ var lang = {
         'wifImport': "Импорт WIF ключа",
         'legacy': "Legacy адрес:",
         'segwit': "Segwit адрес:",
-        'bech32': "Bech32 адрес:",
         'alert1': "WIF ключ успешно импортирован",
         "alert2": "Недействительный WIF",
         'logoutreminder': {
@@ -254,7 +227,6 @@ var lang = {
         'wifImport': "导入WIF",
         'legacy': "Legacy地址:",
         'segwit': "Segwit地址:",
-        'bech32': "Bech32地址:",
         'alert1': "导入WIF地址成功",
         "alert2": "无效的WIF",
         'logoutreminder': {
@@ -278,7 +250,6 @@ var lang = {
         'wifImport': "インポート WIF",
         'legacy': "Legacy 住所:",
         'segwit': "Segwit 住所:",
-        'bech32': "Bech32 住所:",
         'alert1': "WIF 舶来 成功した",
         "alert2": "WIF 病弱な",
         'logoutreminder': {
@@ -304,7 +275,6 @@ function setImportLang() {
         $("#segwit").text(lang['en']['segwit'])
         $("#legacy").text(lang['en']['legacy'])
         $("#wifImport").text(lang['en']['wifImport'])
-        $("#bech32").text(lang['en']['bech32'])
         $("#part1").text(lang['en']['logoutreminder']['part1'])
         $("#logoutlink").text(lang['en']['logoutreminder']['logoutlink'])
         $("#part2").text(lang['en']['logoutreminder']['part2'])
@@ -325,7 +295,6 @@ function setImportLang() {
         $("#segwit").text(lang[localStorage.getItem("lang")]['segwit'])
         $("#legacy").text(lang[localStorage.getItem("lang")]['legacy'])
         $("#wifImport").text(lang[localStorage.getItem("lang")]['wifImport'])
-        $("#bech32").text(lang[localStorage.getItem("lang")]['bech32'])
         $("#part1").text(lang[localStorage.getItem("lang")]['logoutreminder']['part1'])
         $("#logoutlink").text(lang[localStorage.getItem("lang")]['logoutreminder']['logoutlink'])
         $("#part2").text(lang[localStorage.getItem("lang")]['logoutreminder']['part2'])

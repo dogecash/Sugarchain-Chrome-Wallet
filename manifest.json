@@ -1,11 +1,11 @@
 {
-    "name": "Sugarchain Wallet Extension",
-    "version": "1.1",
+    "name": "DogeCash Wallet Extension",
+    "version": "1.0",
     "manifest_version": 2,
-    "description": "Light Web Wallet for Sugarchain as a Chrome Extension.",
+    "description": "Light Web Wallet for DogeCash as a Chrome Extension.",
     "browser_action": {
         "default_popup": "overlay.html",
-        "default_title": "Sugarchain Wallet",
+        "default_title": "DogeCash Wallet",
         "default_icon": "img/logo.png"
     },
     "icons": {

@@ -10,15 +10,9 @@ window.onload = function (){
 
     // Set history page to open to explorer according to mainnet or testnet & set ticker according to mainnet or testnet
     if (apiget == "mainnet" || apiget == null) {
-        api = "https://api.sugarchain.org"
-        prefix = "SUGAR"
-        href = "https://sugarchain.org/explorer/#/address/" + getaddress
-        $("#history").attr("href", href)
-    }
-    else if (apiget == "testnet"){
-        api = "https://api-testnet.sugarchain.org"
-        prefix = "TUGAR"
-        href = "https://sugar.wtf/#/" + getaddress
+        api = "https://api2.dogec.io"
+        prefix = "DOGEC"
+        href = "https://explorer.dogec.io/address/" + getaddress
         $("#history").attr("href", href)
     }
 
@@ -38,19 +32,10 @@ window.onload = function (){
         })
     }
 
-    function getNetHash() {
-        apiCall("/info").then(function(data) {
-            var gethash = data.result.nethash
-            var hash = gethash / 1000000
-            $("#netHashrate").text(hash.toFixed(2) + " MH/s")
-        })
-    }
-
     function getSupply() {
         apiCall("/info").then(function(data) {
-            var getsupply = data.result.supply
-            var supply = getsupply / 100000000
-            $("#circSupply").text(supply + " " + prefix)
+            var getsupply = data.result.supply.totalsupply
+            $("#circSupply").text(getsupply + " " + prefix)
         })
     }
 
@@ -66,7 +51,6 @@ window.onload = function (){
     // Loop functions to continuously show chain info
     setInterval(function() {
         getBlockHeight()
-        getNetHash()
         getSupply()
         getPrice()
     }, 3000)

@@ -21,9 +21,9 @@ window.onload = function() {
 
     // Set history page to open to explorer & sets placeholder to testnet or mainnet prefix
     if (apiget == "mainnet" || apiget == null) {
-        api = "https://api.sugarchain.org"
-        inputPlaceholder.attr("placeholder", "sugar1q...")
-        href = "https://sugarchain.org/explorer/#/address/" + address
+        api = "https://api2.dogec.io"
+        inputPlaceholder.attr("placeholder", "DGM...")
+        href = "https://explorer.dogec.io/address/" + address
     }
     else if (apiget == "testnet"){
         api = "https://api-testnet.sugarchain.org"
@@ -38,33 +38,17 @@ window.onload = function() {
 var errororsuccess
 function getSendAPI() {
     // Set Network config according to Endpoint selection
-    if (localStorage.getItem("api") == "https://api.sugarchain.org" || localStorage.getItem("api") == null){
+    if (localStorage.getItem("api") == "https://api2.dogec.io" || localStorage.getItem("api") == null){
         netconfig = {					
            'network': {
-                'messagePrefix': '\x19Sugarchain Signed Message:\n',
+                'messagePrefix': '\x19DogeCash Signed Message:\n',
                 'bip32': {
                     'public': 0x0488b21e,
                     'private': 0x0488ade4
                 },
-               'bech32': 'sugar',
-               'pubKeyHash': 0x3F,
-               'scriptHash': 0x7D,
-                'wif': 0x80}
-        }
-    }
-      
-    else if (localStorage.getItem("api") == "https://api-testnet.sugarchain.org") {
-        netconfig = {					
-           'network': {
-                'messagePrefix': '\x19Sugarchain Signed Message:\n',
-                'bip32': {
-                    'public': 0x0488b21e,
-                    'private': 0x0488ade4
-                },
-               'bech32': 'tugar',
-               'pubKeyHash': 0x42,
-               'scriptHash': 0x80,
-                'wif': 0xEF}
+                'pubKeyHash': 0x1E,
+                'scriptHash': 0x13,
+                'wif': 0x7A}
         }
     }
 }
@@ -79,17 +63,17 @@ $("#sendTx").click(function () {
         feeShow = convertAmountFormat(fee)
     }
     else {
-        fee = 1000
+        fee = 10000
         feeShow = convertAmountFormat(fee)
     }
     // Don't put fee in convertion of amount format
-    var amount = convertAmountFormat(parseFloat($("#amountSUGAR").val()), true) + fee
+    var amount = convertAmountFormat(parseFloat($("#amountDOGEC").val()), true) + fee
     var amountShow = convertAmountFormat(amount)
     var receiver = $("#sendInput").val()
 
     var scripts = []
 
-    ask = confirm("Confirm Transaction. You are about to send " + $("#amountSUGAR").val() + " SUGAR to " + receiver + ". The fee is " + feeShow/*(amountShow - Number($("#amountSUGAR").val()))*/ + " SUGAR\nTotal Cost: " + amountShow + " SUGAR")
+    ask = confirm("Confirm Transaction. You are about to send " + $("#amountDOGEC").val() + " DOGEC to " + receiver + ". The fee is " + feeShow/*(amountShow - Number($("#amountDOGEC").val()))*/ + " DOGEC\nTotal Cost: " + amountShow + " DOGEC")
     if (ask == true){
         var showErrororSuccess = $("#showErrororSuccess")
         showErrororSuccess.text("Sending Transaction...")
@@ -104,7 +88,7 @@ $("#sendTx").click(function () {
         })).then(function(data) {
 
             var txbuilder = new bitcoin.TransactionBuilder(netconfig['network'])
-            txbuilder.setVersion(2)
+            txbuilder.setVersion(1)
 
             txbuilder.addOutput(receiver, (amount - fee))
             
@@ -116,16 +100,7 @@ $("#sendTx").click(function () {
 
                 var script = bitcoin.Buffer(data.result[i].script, 'hex')
                 var typeofaddress = scriptType(script)
-
-                if (typeofaddress == 'bech32') {
-                    var bech32script = bitcoin.payments.p2wpkh({'pubkey': wif.publicKey, 'network': netconfig['network']})
-
-                    txbuilder.addInput(prevtxid, txindex, null, bech32script.output)
-                }
-
-                else {
-                    txbuilder.addInput(prevtxid, txindex)
-                }
+                txbuilder.addInput(prevtxid, txindex)
 
                 scripts.push({'script': script, 'type': typeofaddress, 'value': data.result[i].value})
             }
@@ -140,11 +115,6 @@ $("#sendTx").click(function () {
 
                 for (var i = 0, size = scripts.length; i < size; i++){
                     switch (scripts[i].type) {
-                        case 'bech32':
-                            var value = scripts[i].value
-                            txbuilder.sign(i, wif, null, null, value, null)
-                            break
-                        
                         case 'segwit':
                             var value = scripts[i].value
                             var redeem = bitcoin.payments.p2wpkh({'pubkey': wif.publicKey, 'network': netconfig['network']})
@@ -221,7 +191,7 @@ function scriptType(script) {
 
 // Reset the values after user sends
 function resetForm() {
-    $("#amountSUGAR").val('')
+    $("#amountDOGEC").val('')
     $("#sendInput").val('')
     $("#feeSugar").val('')
 }

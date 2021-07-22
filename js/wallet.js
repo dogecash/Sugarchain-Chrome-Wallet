@@ -8,7 +8,7 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
 
 
 // Define variable to set QR Code
-var sugarqrcode = new QRCode(document.getElementById("sugarqr"), {
+var dogecqrcode = new QRCode(document.getElementById("dogecqr"), {
     width: 100,
     height: 100,
     position: "center"
@@ -31,10 +31,10 @@ window.onload = function (){
 
     // Set history page to open to explorer, sets placeholder to testnet or mainnet prefix & sets ticker according to mainnet or testnet
     if (apiget == "mainnet" || apiget == null) {
-        api = "https://api.sugarchain.org"
-        prefix = "SUGAR"
-        inputPlaceholder.attr("placeholder", "sugar1q...")
-        href = "https://sugarchain.org/explorer/#/address/" + getaddress
+        api = "https://api2.dogec.io"
+        prefix = "DOGEC"
+        inputPlaceholder.attr("placeholder", "DGM...")
+        href = "https://explorer.dogec.io/address/" + getaddress
         $("#history").attr("href", href)
     }
     else if (apiget == "testnet"){
@@ -91,7 +91,7 @@ window.onload = function (){
                 qrcodegen()
             }
             else {
-                $("#currentBalance").text("Enter a valid Sugarchain address")
+                $("#currentBalance").text("Enter a valid DogeCash address")
                 $("#currentRecieved").text("")
                 $("#currentSpent").text("")
             }
@@ -109,10 +109,10 @@ window.onload = function (){
 // Generate QR code
 function qrcodegen() {
     if (!document.getElementById("addressInput").value) {
-        sugarqrcode.makeCode("Enter an address")
+        dogecqrcode.makeCode("Enter an address")
     }
     else {
-        sugarqrcode.makeCode(document.getElementById("addressInput").value)
+        dogecqrcode.makeCode(document.getElementById("addressInput").value)
     }
 }
 

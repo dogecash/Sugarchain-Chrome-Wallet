@@ -16,10 +16,7 @@ window.onload = function() {
 
     // Sets History Tab to open to explorer
     if (apiget == "mainnet" || apiget == null) {
-        href = "https://sugarchain.org/explorer/#/address/" + getaddress
-    }
-    else if (apiget == "testnet") {
-        href = "https://sugar.wtf/#/address/" + getaddress
+        href = "https://explorer.dogec.io/address/" + getaddress
     }
     $("#history").attr("href", href)
 
@@ -29,33 +26,17 @@ window.onload = function() {
 
 function getMainAPI() {
     // Set Network config according to Endpoint selection
-    if (localStorage.getItem("api") == "https://api.sugarchain.org" || localStorage.getItem("api") == null){
+    if (localStorage.getItem("api") == "https://api2.dogec.io" || localStorage.getItem("api") == null){
         netconfig = {					
            'network': {
-                'messagePrefix': '\x19Sugarchain Signed Message:\n',
+                'messagePrefix': '\x19DogeCash Signed Message:\n',
                 'bip32': {
                     'public': 0x0488b21e,
                     'private': 0x0488ade4
                 },
-               'bech32': 'sugar',
-               'pubKeyHash': 0x3F,
-               'scriptHash': 0x7D,
-                'wif': 0x80}
-        }
-    }
-    
-    else if (localStorage.getItem("api") == "https://api-testnet.sugarchain.org") {
-        netconfig = {					
-            'network': {
-                'messagePrefix': '\x19Sugarchain Signed Message:\n',
-                'bip32': {
-                    'public': 0x0488b21e,
-                    'private': 0x0488ade4
-                },
-                'bech32': 'tugar',
-                'pubKeyHash': 0x42,
-                'scriptHash': 0x80,
-                'wif': 0xEF}
+               'pubKeyHash': 0x1E,
+               'scriptHash': 0x13,
+               'wif': 0x7A}
         }
     }
 }
@@ -65,19 +46,14 @@ $("#generateAddress").click(function() {
     var key = bitcoin.ECPair.makeRandom({'network': netconfig['network']})
     var wif = key.toWIF()
 
-    if (addresstype == "3") {
+    if (addresstype == "2") {
         address = bitcoin.payments.p2pkh({'pubkey': key.publicKey, 'network': netconfig['network']}).address
         $("#addressDisplay").text(address)
         localStorage.setItem("address", address)
     }
-    else if (addresstype == "2") {
+    else if (addresstype == "1") {
         redeem = bitcoin.payments.p2wpkh({'pubkey': key.publicKey, 'network': netconfig['network']})
         address = bitcoin.payments.p2sh({'redeem': redeem, 'network': netconfig['network']}).address
-        $("#addressDisplay").text(address)
-        localStorage.setItem("address", address)
-    }
-    else if (addresstype == "1"){
-        address = bitcoin.payments.p2wpkh({'pubkey': key.publicKey, 'network': netconfig['network']}).address
         $("#addressDisplay").text(address)
         localStorage.setItem("address", address)
     }
@@ -95,10 +71,7 @@ $("#generateAddress").click(function() {
 
     // Sets History Tab to open to explorer
     if (apiget == "mainnet" || apiget == null) {
-        href = "https://sugarchain.org/explorer/#/address/" + getaddress
-    }
-    else if (apiget == "testnet") {
-        href = "https://sugar.wtf/#/address/" + getaddress
+        href = "https://explorer.dogec.io/address/" + getaddress
     }
     $("#history").attr("href", href)
 })
