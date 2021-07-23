@@ -28,15 +28,15 @@ function getMainAPI() {
     // Set Network config according to Endpoint selection
     if (localStorage.getItem("api") == "https://api2.dogec.io" || localStorage.getItem("api") == null){
         netconfig = {					
-           'network': {
+            'network': {
                 'messagePrefix': '\x19DogeCash Signed Message:\n',
                 'bip32': {
-                    'public': 0x0488b21e,
-                    'private': 0x0488ade4
+                    'public': 0x022D2533,
+                    'private': 0x0221312B
                 },
-               'pubKeyHash': 0x1E,
-               'scriptHash': 0x13,
-               'wif': 0x7A}
+                'pubKeyHash': 0x1E,
+                'scriptHash': 0x13,
+                'wif': 0x7A}
         }
     }
 }
@@ -46,14 +46,8 @@ $("#generateAddress").click(function() {
     var key = bitcoin.ECPair.makeRandom({'network': netconfig['network']})
     var wif = key.toWIF()
 
-    if (addresstype == "2") {
+    if (addresstype == "1") {
         address = bitcoin.payments.p2pkh({'pubkey': key.publicKey, 'network': netconfig['network']}).address
-        $("#addressDisplay").text(address)
-        localStorage.setItem("address", address)
-    }
-    else if (addresstype == "1") {
-        redeem = bitcoin.payments.p2wpkh({'pubkey': key.publicKey, 'network': netconfig['network']})
-        address = bitcoin.payments.p2sh({'redeem': redeem, 'network': netconfig['network']}).address
         $("#addressDisplay").text(address)
         localStorage.setItem("address", address)
     }

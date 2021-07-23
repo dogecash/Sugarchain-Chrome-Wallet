@@ -43,8 +43,8 @@ function getSendAPI() {
            'network': {
                 'messagePrefix': '\x19DogeCash Signed Message:\n',
                 'bip32': {
-                    'public': 0x0488b21e,
-                    'private': 0x0488ade4
+                    'public': 0x022D2533,
+                    'private': 0x0221312B
                 },
                 'pubKeyHash': 0x1E,
                 'scriptHash': 0x13,

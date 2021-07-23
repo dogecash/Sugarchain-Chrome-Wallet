@@ -22,11 +22,11 @@ function getImportAPI() {
     // Set Network config according to Endpoint selection
     if (localStorage.getItem("api") == "https://api2.dogec.io" || localStorage.getItem("api") == null){
         netconfig = {					
-           'network': {
+            'network': {
                 'messagePrefix': '\x19DogeCash Signed Message:\n',
                 'bip32': {
-                    'public': 0x0488b21e,
-                    'private': 0x0488ade4
+                    'public': 0x022D2533,
+                    'private': 0x0221312B
                 },
                 'pubKeyHash': 0x1E,
                 'scriptHash': 0x13,
@@ -45,10 +45,8 @@ $("#wifImport").click(function() {
         var wifInput = $("#wifInput").val()
 
         var wifKey = bitcoin.ECPair.fromWIF(wifInput, netconfig['network'])
-        var redeem = bitcoin.payments.p2wpkh({'pubkey': wifKey.publicKey, 'network': netconfig['network']})
     
         var legacyadd = bitcoin.payments.p2pkh({'pubkey': wifKey.publicKey, 'network': netconfig['network']}).address
-        var segwitadd = bitcoin.payments.p2sh({'redeem': redeem, 'network': netconfig['network']}).address
 
         alert(alert1)
 
@@ -57,15 +55,12 @@ $("#wifImport").click(function() {
         localStorage.setItem("wifKey", $("#wifInput").val())
     
         $("#showLegacy").text(legacyadd)
-        $("#showSegwit").text(segwitadd)
     }
     // Else show error
     else if ($("#wifInput").val().length != 52 || $("#wifInput").val().length != 51){
         alert(alert2)
 
         $("#showLegacy").text('')
-        $("#showBech32").text('')
-        $("#showSegwit").text('')
     }
 
     var getaddress = localStorage.getItem("address")
