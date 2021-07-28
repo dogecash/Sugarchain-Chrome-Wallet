@@ -1,5 +1,5 @@
 # DogeCash-Chrome-Wallet
-Light dogecash Web wallet in the form of a chrome extension which utilises bitcoin.js and a simple REST API https://api2.dogec.io
+Light dogecash Web wallet in the form of a chrome extension which utilises bitcoin.js and a simple REST API https://api2.dogecash.org
 
 
 ### Installation

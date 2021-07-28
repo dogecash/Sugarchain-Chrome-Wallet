@@ -10,9 +10,9 @@ window.onload = function (){
 
     // Set history page to open to explorer according to mainnet or testnet & set ticker according to mainnet or testnet
     if (apiget == "mainnet" || apiget == null) {
-        api = "https://api2.dogec.io"
+        api = "https://api2.dogecash.org"
         prefix = "DOGEC"
-        href = "https://explorer.dogec.io/address/" + getaddress
+        href = "https://explorer.dogecash.org/address/" + getaddress
         $("#history").attr("href", href)
     }
 

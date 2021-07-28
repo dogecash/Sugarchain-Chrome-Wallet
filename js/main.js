@@ -16,7 +16,7 @@ window.onload = function() {
 
     // Sets History Tab to open to explorer
     if (apiget == "mainnet" || apiget == null) {
-        href = "https://explorer.dogec.io/address/" + getaddress
+        href = "https://explorer.dogecash.org/address/" + getaddress
     }
     $("#history").attr("href", href)
 
@@ -26,7 +26,7 @@ window.onload = function() {
 
 function getMainAPI() {
     // Set Network config according to Endpoint selection
-    if (localStorage.getItem("api") == "https://api2.dogec.io" || localStorage.getItem("api") == null){
+    if (localStorage.getItem("api") == "https://api2.dogecash.org" || localStorage.getItem("api") == null){
         netconfig = {					
             'network': {
                 'messagePrefix': '\x19DogeCash Signed Message:\n',
@@ -65,7 +65,7 @@ $("#generateAddress").click(function() {
 
     // Sets History Tab to open to explorer
     if (apiget == "mainnet" || apiget == null) {
-        href = "https://explorer.dogec.io/address/" + getaddress
+        href = "https://explorer.dogecash.org/address/" + getaddress
     }
     $("#history").attr("href", href)
 })

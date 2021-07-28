@@ -21,14 +21,9 @@ window.onload = function() {
 
     // Set history page to open to explorer & sets placeholder to testnet or mainnet prefix
     if (apiget == "mainnet" || apiget == null) {
-        api = "https://api2.dogec.io"
+        api = "https://api2.dogecash.org"
         inputPlaceholder.attr("placeholder", "DGM...")
-        href = "https://explorer.dogec.io/address/" + address
-    }
-    else if (apiget == "testnet"){
-        api = "https://api-testnet.sugarchain.org"
-        inputPlaceholder.attr("placeholder", "tugar1q...")
-        href = "https://sugar.wtf/#/address/" + address
+        href = "https://explorer.dogecash.org/address/" + address
     }
     $("#history").attr("href", href)
 
@@ -38,7 +33,7 @@ window.onload = function() {
 var errororsuccess
 function getSendAPI() {
     // Set Network config according to Endpoint selection
-    if (localStorage.getItem("api") == "https://api2.dogec.io" || localStorage.getItem("api") == null){
+    if (localStorage.getItem("api") == "https://api2.dogecash.org" || localStorage.getItem("api") == null){
         netconfig = {					
            'network': {
                 'messagePrefix': '\x19DogeCash Signed Message:\n',

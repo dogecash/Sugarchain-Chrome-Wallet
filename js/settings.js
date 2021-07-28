@@ -12,7 +12,7 @@ window.onload = function() {
 
     // Sets History Tab to open to explorer according to testnet or mainnet
     if (apiget == "mainnet" || apiget == null) {
-        href = "https://explorer.dogec.io/address/" + getaddress
+        href = "https://explorer.dogecash.org/address/" + getaddress
     }
     $("#history").attr("href", href)
 
@@ -24,7 +24,7 @@ window.onload = function() {
     }
 }
 
-var mainnet = "https://api2.dogec.io"
+var mainnet = "https://api2.dogecash.org"
 // Set the api in local storage
 function setAPI() {
     var apiSet = localStorage.getItem("apiSet")

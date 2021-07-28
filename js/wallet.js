@@ -31,17 +31,10 @@ window.onload = function (){
 
     // Set history page to open to explorer, sets placeholder to testnet or mainnet prefix & sets ticker according to mainnet or testnet
     if (apiget == "mainnet" || apiget == null) {
-        api = "https://api2.dogec.io"
+        api = "https://api2.dogecash.org"
         prefix = "DOGEC"
         inputPlaceholder.attr("placeholder", "DGM...")
-        href = "https://explorer.dogec.io/address/" + getaddress
-        $("#history").attr("href", href)
-    }
-    else if (apiget == "testnet"){
-        api = "https://api-testnet.sugarchain.org"
-        prefix = "TUGAR"
-        inputPlaceholder.attr("placeholder", "tugar1q...")
-        href = "https://sugar.wtf/#/address/" + getaddress
+        href = "https://explorer.dogecash.org/address/" + getaddress
         $("#history").attr("href", href)
     }
 
